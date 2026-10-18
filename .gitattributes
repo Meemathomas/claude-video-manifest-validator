@@ -1,0 +1,2 @@
+# Keep HLS manifests LF on every platform so validation is consistent
+*.m3u8 text eol=lf
