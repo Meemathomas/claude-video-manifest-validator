@@ -1,0 +1,7 @@
+venv-manifest-validator/
+__pycache__/
+*.pyc
+
+# Office temp/lock files
+~$*
+~WRL*.tmp
