@@ -1,0 +1,8 @@
+[tool.pytest.ini_options]
+# Lets tests "import validator" from source/.
+pythonpath = ["source"]
+testpaths = ["tests"]
+
+[tool.pyright]
+# Same for Pylance / Pyright in the editor.
+extraPaths = ["source"]

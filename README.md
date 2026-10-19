@@ -96,6 +96,15 @@ python source/validator.py --help
 
 Without `--base-url`, the bundled sample reports one warning. That's because only the master manifest is stored locally, not the child playlists it references. Pass `--base-url` to check those URIs on Apple's server instead.
 
+## Running the tests
+
+The unit tests use [pytest](https://docs.pytest.org/). They run offline because network calls are mocked.
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
 ## Project structure
 
 ```
@@ -105,6 +114,10 @@ claude-video-manifest-validator/
 ├── samples/
 │   └── master_manifest/
 │       └── sample_master1.m3u8   # Sample input (Apple bipbop test stream)
+├── tests/
+│   └── test_validator.py         # Unit tests (pytest)
+├── pyproject.toml                # pytest / Pylance config (source/ on path)
+├── requirements-dev.txt          # pytest + autopep8 (development only)
 ├── .claude/                      # Claude Code settings (autopep8 format hook)
 ├── CLAUDE.md                     # Coding rules for Claude Code
 └── README.md

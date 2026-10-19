@@ -1,0 +1,48 @@
+  ● Claude has context of ⧉ open files and ⧉ selected lines
+
+  ● Review Claude Code's changes +11 -22 in the comfort of your IDE
+
+  ● Cmd+Esc for Quick Launch
+
+  ● Ctrl+Alt+K to reference files or lines in your input
+ Press Enter to continue
+
+
+----------------------------------------------------------------------------
+ I've created validator.py in the project root. Against the Apple sample, every check passes; a deliberately broken manifest produced 22 errors and
+  9 warnings. It uses only Python's standard library, and pycodestyle reports no PEP 8 problems.
+
+  How to run it:
+  python validator.py                       # validates samples/sample_master.m3u8
+  python validator.py path/to/other.m3u8    # any other manifest
+  python validator.py --base-url https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8
+  It exits with code 1 if it finds errors and 0 otherwise.
+
+  What it checks:
+  - Header: #EXTM3U must be the exact first line, with no byte-order mark or extra whitespace, and must appear only once.
+  - #EXT-X-STREAM-INF: the attribute list is parsed (quoted values containing commas are handled) and every value's type is checked. BANDWIDTH is
+    required and must be above 0, RESOLUTION must be WIDTHxHEIGHT with no zero side, CODECS must be quoted, and duplicate or unknown attributes are
+    flagged. Each tag must be followed by a URI line.
+  - #EXT-X-I-FRAME-STREAM-INF and #EXT-X-MEDIA: required attributes are checked, plus the spec's rules, e.g. closed captions must have INSTREAM-ID
+    and no URI, subtitles need a URI, and DEFAULT=YES requires AUTOSELECT=YES.
+  - Group references: every AUDIO, SUBTITLES, VIDEO or CLOSED-CAPTIONS value on a variant must match a declared #EXT-X-MEDIA group.
+  - URI format: no whitespace or backslashes, only http/https for absolute URLs, and the URI must name a file (a warning if it doesn't end in .m3u8).
+  - URI existence: by default, URIs are looked up as files next to the manifest. With --base-url, each URI is resolved against that URL and checked
+    over HTTP.
+  - It also flags media-playlist tags such as #EXTINF inside a master playlist, URI lines with no stream tag before them, and unknown tags.
+
+  Results on the Apple sample:
+  - Default run: every format check passes, with one warning: the 18 child playlists aren't on disk. That's expected, because we only downloaded the
+    master manifest. The warning suggests --base-url.
+  - With --base-url: all 18 URIs returned HTTP 200 from Apple's server, giving a clean pass with no issues.
+
+  The report lists file details, counts of each tag type, a pass/warn/fail line per check, each URI with its status, and issues with line numbers.
+
+  Two things to know:
+  - It validates master playlists only. Pointing it at a media playlist (the ones listing segments) would report errors.
+  - The broken test manifest is outside the project at C:\Users\anish\AppData\Local\Temp\claude\C--Meema-InterviewPrep-python-claude-video-manifest-v
+    alidator\7b6a5c23-f0e0-4916-a96f-fc11c88d5ffa\scratchpad\broken.m3u8. It could become a test fixture later.
+
+  validator.py isn't committed yet. Tell me when you want it committed.
+
+✻ Churned for 3m 15s · done 7:51 PM
