@@ -1,0 +1,74 @@
+----------------------------------------------------------------------------
+ PROMPT SUMMARY - HLS Manifest Validator session (2026-10-18 to 2026-10-19)
+----------------------------------------------------------------------------
+
+ 1. Project setup and Claude configuration
+  1. "create a claude.md file. Add these rules: 1. .py extension 2. PEP 8 3. camelCase function names"
+     -> Created CLAUDE.md
+  2. "remove 3rd rule. Then open the CLAUDE.md file for me to manually review"
+     -> Removed the camelCase rule and opened the file
+  3. "this looks good. commit changes"
+     -> Prepared the commit
+  4. "why can i not see the .claude folder inside the claude-video-manifest-validator?"
+     -> Explained that the folder is hidden and when it gets created
+  5. "Tell me more about, adding project-specific settings"
+     -> Explained .claude/settings.json vs settings.local.json
+  6. "create a post tool PEP8 formatting hook for claude edits on .py file types"
+     -> Added a hook that runs autopep8 after each Python file edit
+  7. "fix the gitignore and commit everything except venv" / "done, commit now"
+     -> Fixed .gitignore (it was saved as UTF-16) and made the initial commit
+  8. git config --global user.email / user.name "Meema Thomas"
+     -> Set the git identity
+
+ 2. Sample input
+  9. "Lets get on with the project... find a reliable, free-to-use public test HLS stream...
+     save it as sample_master.m3u8"
+     -> Downloaded Apple's public "bipbop" test manifest
+ 10. "Since this is an input file, should I place it in a subfolder...? Suggest me a subfolder"
+     -> Moved it into samples/
+ 11. "commit the samples folder"
+     -> Committed
+ 12. "add the .gitattributes and commit it"
+     -> Added *.m3u8 text eol=lf and committed
+ 13. "ls samples"
+     -> Listed the folder
+
+ 3. Validator
+ 14. "create the manifest validator... validator.py... starts with #EXTM3U, #EXT-X-STREAM-INF
+     properly structured, URI paths exist or match correct formatting, clean validation report"
+     (sent 3 times)
+     -> Built validator.py
+ 15. "Create a source folder and move validator.py into it... sub folder master manifest...
+     rename sample_master.m3u8 to sample_master1.m3u8... update code"
+     -> Moved the script to source/ and the sample to
+        samples/master_manifest/sample_master1.m3u8, then updated the paths in the code
+ 16. "Add a README.md file... summary, input/output, how to run"
+     -> Wrote README.md
+ 17. "commit the README, source and samples changes"
+     -> Committed
+
+ 4. Tests
+ 18. "add unit tests for the validator"
+     -> Added tests/test_validator.py (pytest) and pyproject.toml
+ 19. "Add a header for this file describing the total number of tests and add a comment block
+     above each test describing what the test is doing"
+     -> Added a header giving the count (89 tests) and a comment above each test
+ 20. "commit all changes with a descriptive commit message"
+     -> Committed
+
+ 5. GitHub
+ 21. git branch -M main
+     -> Nothing changed; the branch was already main
+ 22. git remote add origin https://github.com/Meemathomas/claude-video-manifest-validator.git
+     -> Added the remote
+ 23. ! git push -u origin main
+     -> Timed out waiting for sign-in, then was stopped because the system was low on memory
+ 24. "push -u origin main"
+     -> Pushed all 5 commits; main now tracks origin/main
+ 25. "rewind"
+     -> Claude asked which meaning was intended; nothing was done
+ 26. "create a summary of all the prompts I used"
+     -> This summary
+
+ Totals: 26 prompts across 5 areas. 6 asked for commits and 4 were git or shell commands
+ typed directly.
